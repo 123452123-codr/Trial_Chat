@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <style>
+            table, tr, td {
+                border: 1px solid white;
+            }
+            #messagecolumn {
+                height: 200px;
+                width: 400px;
+                overflow: auto;
+            }
+        </style>
+        <div class="container">
+            <table>
+                <tr>
+                    <td id="messagecolumn">
+                        <ul id="m"></ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="inputcolumn">
+                        <input type="text" class="form-control input-lg" name="a" id="t">
+                    </td>
+                    <td id="buttoncolumn"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>
