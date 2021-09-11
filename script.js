@@ -2,8 +2,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-analytics.js";
 import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.0.1/firebase-database.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
     apiKey: "AIzaSyCX_J_3OFvZd0Yk4zkWR_aaIaf5UMLWZGY",
@@ -19,3 +17,30 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+var message = document.getElementById('m');
+var text = document.getElementById('t').value;
+var send = document.getElementById('s');
+
+send.addEventListener('click', function(){
+    var oldscrollheight = $("#message")[0].scrollheight - 20;
+
+    const db = getDatabase();
+    set(ref(db, 'Chat'), {
+        Name: text
+    });
+
+    onValue(ref(db, 'Chat'), (snapshot) => {
+        const data = snapshot.val();
+        var newMessage = document.createElement("li");
+        newMessage.classList.add("list-group");
+        newMessage.innerHTML = data.value;
+        var newscrollheight = $("#message")[0].scrollheight = 20;
+        if(newscrollheight > oldscrollheight)
+        {
+            $("#message").animate({scrollTop: newscrollheight}, 'normal');
+            message.appendChild(newMessage);
+            text.value = "";
+        }
+    });
+});
