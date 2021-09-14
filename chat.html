@@ -15,6 +15,9 @@
                 width: 400px;
                 overflow: auto;
             }
+            #stick {
+                position: fixed;
+            }
         </style>
         <div class="container">
             <table>
@@ -23,7 +26,7 @@
                         <ul id="m"></ul>
                     </td>
                 </tr>
-                <tr>
+                <tr id="stick">
                     <td id="inputcolumn">
                         <input type="text" class="form-control input-lg" name="a" id="t">
                     </td>
@@ -78,9 +81,9 @@
                 newMessage.innerHTML = data;
 
                 var newscrollHeight = message.scrollHeight;
-                if(newscrollheight > oldscrollheight)
+                if(newscrollHeight > oldscrollHeight)
                 {
-                    message.scrollTo(newscrollHeight);
+                    message.scrollTop(newscrollHeight - oldscrollHeight);
                     message.appendChild(newMessage);
                     text.value = "";
                 }
@@ -90,40 +93,6 @@
                     text.value = "";
                 }
             });
-        });
-
-        text.addEventListener("keydown", function(event){
-            var key = event.which || event.key;
-
-            if(key === 13)
-            {
-                event.preventDefault();
-
-                var oldscrollheight = $("#message")[0].scrollheight - 20;
-
-                const db = getDatabase();
-                set(ref(db, 'Chat'), {
-                    Name: text.value
-                });
-
-                onValue(ref(db, 'Chat'), (snapshot) => {
-                    const data = snapshot.val();
-                    var newMessage = document.createElement("li");
-                    newMessage.classList.add("list-group");
-                    newMessage.innerHTML = data.value;
-                    var newscrollheight = $("#message")[0].scrollheight = 20;
-                    if(newscrollheight > oldscrollheight)
-                    {
-                        $("#message").animate({scrollTop: newscrollheight}, 'normal');
-                        message.appendChild(newMessage);
-                        text.value = "";
-                    }
-                    else
-                    {
-                        message.appendChild(n)
-                    }
-                });
-            }
         });
     </script>
 </html>
