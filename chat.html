@@ -72,26 +72,20 @@
 
             const db = getDatabase();
             set(ref(db, 'Chat'), {
-                Name: text
+                Name: text.value
             });
 
             onValue(ref(db, 'Chat'), (snapshot) => {
                 const data = snapshot.val();
                 var newMessage = document.createElement("li");
                 newMessage.classList.add("list-group");
-                newMessage.innerHTML = data;
+                newMessage.innerHTML = data.value;
+                message.appendChild(newMessage);
 
-                var newscrollHeight = message.scrollHeight;
-                if(newscrollHeight > oldscrollHeight)
+                var newscrollheight = message.scrollHeight;
+                if(newscrollheight > oldscrollHeight)
                 {
-                    message.scrollTop(newscrollHeight - oldscrollHeight);
-                    message.appendChild(newMessage);
-                    text.value = "";
-                }
-                else
-                {
-                    message.appendChild(newMessage);
-                    text.value = "";
+                    message.scrollTop = (newscrollheight - oldscrollHeight);
                 }
             });
         });
