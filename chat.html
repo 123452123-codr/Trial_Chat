@@ -16,7 +16,8 @@
                 overflow: auto;
             }
             #stick {
-                position: fixed;
+                position: sticky;
+                position: -webkit-sticky;
             }
         </style>
         <div class="container">
@@ -71,7 +72,7 @@
 
             const db = getDatabase();
             set(ref(db, 'Chat'), {
-                Name: text.value
+                Name: text
             });
 
             onValue(ref(db, 'Chat'), (snapshot) => {
