@@ -69,24 +69,12 @@
         var text = document.getElementById('t');
         var send = document.getElementById('s');
 
-        send.addEventListener('click', function(){
-            var oldscrollHeight = message.scrollHeight;
-
+        send.addEventListener("click", function(){
             const db = getDatabase();
-            set(ref(db, 'Chat'), {
-                Namew: text.value
-            });
 
-            setTimeout(function(){
-                onValue(ref(db, 'Chat'), (snapshot) => {
-                    const data = snapshot.val().Namew;
-                    var newMessage = document.createElement("li");
-                    newMessage.classList.add("list-group");
-                    newMessage.innerHTML = data;
-                    message.appendChild(newMessage);
-                    text.value = "";
-                }, 100);
+            set(ref(db, 'Chat'), {
+                Name: text.value
             });
-        });
+        })
     </script>
 </html>
